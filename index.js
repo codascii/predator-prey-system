@@ -1,0 +1,5 @@
+class Fox {
+    constructor() {
+        this.
+    }
+}
