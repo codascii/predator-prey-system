@@ -51,35 +51,6 @@ class Lapin {
     }
 }
 
-<<<<<<< HEAD
-class  Renard {
-
-    constructor(vitesse, frequence_apparition, distance,dureeF, nbr_renard) {
-        this.vitesse = vitesse;
-        this.frequence_apparition = frequence_apparition;
-        this.distance= distnace;
-        this.dureeF = dureeF;
-        this.nbr_renard = 10;
-    }
-
-   SeDeplacent(){
-        return ;
-    }
-
-
-    MangeLapin(){
-
-        return;
-    }
-
-    Meurt(){
-         
-        return;
-    }
-}
-=======
-
->>>>>>> 4b6c8b9a8d5c3ba2d5ad71c37105e599a12b7cdf
 
 
 var canvas = document.querySelector('canvas#app');
@@ -90,7 +61,6 @@ canvas.height = window.innerHeight;
 var c = canvas.getContext('2d');
 /*c.fillRect(100, 100, 100, 100);
 c.fillRect(200, 100, 100, 100);
-<<<<<<< HEAD
 c.fillRect(300, 100, 100, 100);*/
 
 
@@ -135,8 +105,3 @@ function animate() {
 
 animate();
 
-
-=======
-c.fillRect(300, 100, 100, 100);
-console.log(canvas);*/
->>>>>>> 4b6c8b9a8d5c3ba2d5ad71c37105e599a12b7cdf
