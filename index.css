@@ -1,13 +1,25 @@
 body {
-    margin: 20px 0;
+    margin: 0;
     padding: 0;
+    position: relative;
+    font-family: Arial, serif, sans-serif;
+    font-size: .85 !important;
 }
 
 canvas {
     display: block;
     border: 1px solid #eeeeee;
-    width: 1000px;
-    height: 600px;
+    /*width: 1000px;
+    height: 600px;*/
     background-color: green;
     margin: 0 auto;
+}
+
+div#config{
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, .6);
 }
