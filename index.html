@@ -9,11 +9,33 @@
     </head>
     <body>
         <div id="config">
-            <p>Fréquence d'apparition</p>
-            <p>Distance de visibilité</p>
+            <div>
+                    <p>Fréquence d'apparition</p>
+                    <input type="button" value="+10 Lapins">
+                    <input type="button" value="+10 Renards">
+                    <input type="button" value="Reset" class="reset">
+
+            </div>
+            <div>
+                    <p>Distance de visibilité</p>
+                    <input type="text" value="10">
+                    <input type="submit" value="valider">
+            </div>
+            <div>   
             <p>Durée de vie d'un renard</p>
-            <p>Nombre de lapin initial</p>
-            <p>Nombre de renard initial</p>
+            <input type="text" placeholder="secondes">
+            <input type="submit" value="valider">
+            </div>
+            <div>
+                    <p>Nombre de lapin initial</p>
+                    <input type="text" placeholder="secondes">
+                    <input type="submit" value="valider">
+            </div>
+            <div>
+                    <p>Nombre de renard initial</p>
+                    <input type="text" placeholder="secondes">
+                    <input type="submit" value="valider">
+            </div>
         </div>
         <canvas id="app"></canvas>
         <script src="index.js"></script>

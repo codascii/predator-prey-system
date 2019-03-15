@@ -8,10 +8,7 @@ body {
 
 canvas {
     display: block;
-    border: 1px solid #eeeeee;
-    /*width: 1000px;
-    height: 600px;*/
-    background-color: green;
+    background-color: #f2f2f2;
     margin: 0 auto;
 }
 
@@ -19,7 +16,25 @@ div#config{
     position: absolute;
     top: 20px;
     left: 30px;
-    padding: 10px;
+    padding: 20px;
     border-radius: 6px;
     background-color: rgba(255, 255, 255, .6);
+}
+
+input[type=text] {
+    border-radius: 5px;
+    padding: 6px 6px;
+    border: 1px solid #dedede;
+}
+
+input[type=submit], .reset {
+    background-color: rgb(15, 142, 226);
+    border: none;
+    border-radius: 5px;
+    padding: 6px 10px;
+    color: white;
+}
+
+.reset {
+    background-color: red;
 }
