@@ -36,6 +36,11 @@ class  Renard {
         this.y += this.dy;
 
         this.creer();
+        this.checkTTL();
+    }
+
+    checkTTL() {
+        
     }
 
    SeDeplacent(){
