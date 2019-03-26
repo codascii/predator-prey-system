@@ -187,6 +187,15 @@ var app = {
             var dy = (Math.random() - 0.5) * 8;
             app.rabbits.push(new Lapin({x: x, y: y}, dx, dy, rayon));
         }, app.rabbitFrequency * 1000);
+
+        setInterval(() => {
+            var rayon = 30;
+            var x = Math.random() * (innerWidth - rayon * 2) + rayon;
+            var y = Math.random() * (innerHeight - rayon * 2) + rayon;
+            var dx = (Math.random() - 0.5) * 8;
+            var dy = (Math.random() - 0.5) * 8;
+            app.renards.push(new Renard({x: x, y: y}, dx, dy, rayon));
+        }, app.rabbitFrequency * 10000);
     },
     reset: (what) => {
         console.log("reset");
