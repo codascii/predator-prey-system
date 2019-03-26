@@ -10,47 +10,50 @@
     </head>
     <body>
         <div id="config" class="jumbotron position-absolute">
-            <div>
-                <p>Fréquence d'apparition</p>
+            <div class="line">
+                <span>Fréquence d'apparition</span>
                 <div class="form-inline">
                     <input type="button" value="+10 Lapins" class="btn btn-primary">
                     <span>&nbsp;&nbsp;&nbsp;</span>
                     <input type="button" value="+10 Renards" class="btn btn-primary">
                     <span>&nbsp;&nbsp;&nbsp;</span>
-                    <input type="button" value="Reset" class="btn btn-primary reset">
+                    <input type="button" value="Reset" class="btn btn-danger reset">
                 </div>
             </div>
-            <div>
-                <p>Distance de visibilité</p>
+            <div class="line">
+                <span>Distance de visibilité</span>
                 <div class="form-inline">
                     <input type="text" class="form-control" value="10"/>
                     <span>&nbsp;&nbsp;&nbsp;</span>
                     <input type="submit" value="valider" class="btn btn-primary">
                 </div>
             </div>
-            <div>   
-                <p>Durée de vie d'un renard</p>
+            <div class="line">
+                <span>Durée de vie d'un renard</span>
                 <div class="form-inline">
                     <input type="text" placeholder="secondes" class="form-control"/>
                     <span>&nbsp;&nbsp;&nbsp;</span>
                     <input type="submit" value="valider" class="btn btn-primary">
                 </div>
             </div>
-            <div>
-                <p>Nombre de lapin initial</p>
+            <div class="line">
+                <span>Nombre de lapin initial</span>
                 <div class="form-inline">
                     <input type="text" placeholder="secondes" class="form-control">
                     <span>&nbsp;&nbsp;&nbsp;</span>
                     <input type="submit" value="valider" class="btn btn-primary">
                 </div>
             </div>
-            <div>
-                <p>Nombre de renard initial</p>
+            <div class="line">
+                <span>Nombre de renard initial (10 par défaut)</span>
                 <div class="form-inline">
-                    <input type="text" placeholder="secondes" class="form-control">
+                    <input type="text" id="initialFoxNumber" placeholder="secondes" class="form-control">
                     <span>&nbsp;&nbsp;&nbsp;</span>
-                    <input type="submit" value="valider" class="btn btn-primary">
+                    <input type="submit" value="valider" class="btn btn-primary" onclick="app.updateFoxNumnber()">
                 </div>
+            </div>
+            <div class="line">
+                <button class="btn btn-success" style="width:100%" onclick="app.start();">Démarrer la simulation</button>
             </div>
         </div>
         <canvas id="app"></canvas>

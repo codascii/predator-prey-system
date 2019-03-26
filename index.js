@@ -101,23 +101,12 @@ for (var i = 1; i < 100; i++) {
     c.stroke();
 }*/
 
-var renards = [];
-for (var i = 1; i <= 100; i++) {
-    var rayon = 30;
-    var x = Math.random() * (innerWidth - rayon * 2) + rayon;
-    var y = Math.random() * (innerHeight - rayon * 2) + rayon;
-    var dx = (Math.random() - 0.5) * 8;
-    var dy = (Math.random() - 0.5) * 8;
 
-    renards.push(new Renard({x: x, y: y}, dx, dy, rayon));
-}
-
-console.log(renards);
 
 
 var rayon = 30;
 var y = 200;
-function animate() {
+/*function animate() {
     // Permet d'éxécuter la fonction animate plusieurs fois
     requestAnimationFrame(animate);
     c.clearRect(0, 0, innerWidth, innerHeight);
@@ -142,7 +131,60 @@ function animate() {
     }
     x += dx;
     y += dy;
-}
+}*/
 
-animate();
+//animate();
+
+
+var app = {
+    alredyStarted: false,
+    // Nombre initiale de renard
+    initialFoxNumber: 0,
+    renards: [],
+    start: () => {
+        if (app.alredyStarted) app.reset();
+        else app.alredyStarted = true;
+
+        console.log('Application started !');
+        app.initFox();
+        app.show();
+        console.log(app.renards);
+
+    },
+    initFox: () => {
+        var ifn = parseInt(document.getElementById('initialFoxNumber').value);
+        app.initialFoxNumber = (ifn < 0 || isNaN(ifn)) ? 10 : ifn;
+
+        for (var i = 1; i <= app.initialFoxNumber; i++) {
+            var rayon = 30;
+            var x = Math.random() * (innerWidth - rayon * 2) + rayon;
+            var y = Math.random() * (innerHeight - rayon * 2) + rayon;
+            var dx = (Math.random() - 0.5) * 8;
+            var dy = (Math.random() - 0.5) * 8;
+            app.renards.push(new Renard({x: x, y: y}, dx, dy, rayon));
+        }
+    },
+    updateFoxNumnber: () => {
+        app.reset('Fox');
+        app.initFox();
+    },
+    show: () => {
+        app.animate();
+    },
+    animate: () => {
+        // Permet d'éxécuter la fonction animate plusieurs fois
+        requestAnimationFrame(app.animate);
+        c.clearRect(0, 0, innerWidth, innerHeight);
+    
+        //renard.creer();
+    
+        for (var i = 0; i < app.renards.length; i++) {
+            app.renards[i].update();
+        }
+    },
+    reset: (what) => {
+        console.log("reset");
+        if (what === "Fox") app.renards = [];        
+    }
+}
 

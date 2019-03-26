@@ -20,20 +20,6 @@ div#config{
     border: 1px solid #dedede;
 }
 
-input[type=text] {
-    border-radius: 5px;
-    padding: 6px 6px;
-    border: 1px solid #dedede;
-}
-
-input[type=submit], .reset {
-    background-color: rgb(15, 142, 226);
-    border: none;
-    border-radius: 5px;
-    padding: 6px 10px;
-    color: white;
-}
-
-.reset {
-    background-color: red;
+div#config .line {
+    margin: 10px 0;
 }
