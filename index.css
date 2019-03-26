@@ -13,12 +13,11 @@ canvas {
 }
 
 div#config{
-    position: absolute;
     top: 20px;
     left: 30px;
-    padding: 20px;
     border-radius: 6px;
-    background-color: rgba(255, 255, 255, .6);
+    background-color: rgba(255, 255, 255, .5);
+    border: 1px solid #dedede;
 }
 
 input[type=text] {
