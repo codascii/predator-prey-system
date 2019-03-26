@@ -15,10 +15,13 @@ class  Renard {
     }
 
     creer() {
-        c.beginPath();
+        /*c.beginPath();
         c.arc(this.x, this.y, this.rayon, 0, Math.PI * 2, false);
         c.strokeStyle = 'blue';
-        c.stroke();
+        c.stroke();*/
+
+        var img = document.getElementById("fox");
+        c.drawImage(img, this.x, this.y, 50, 50);
     }
 
     update() {
