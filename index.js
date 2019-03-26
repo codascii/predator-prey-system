@@ -1,12 +1,38 @@
-
+// Les renards sont les cercles
 class  Renard {
 
-    constructor(vitesse, frequence_apparition, distance,dureeF, nbr_renard) {
-        this.vitesse = vitesse;
+    constructor(coords, dx, dy, rayon, vitesse, frequence_apparition, distance,dureeF, nbr_renard) {
+        this.x = coords.x
+        this.y = coords.y
+        this.dx = dx;
+        this.dy = dy;
+        this.rayon = rayon;
+        /*this.vitesse = vitesse;
         this.frequence_apparition = frequence_apparition;
         this.distance= distnace;
         this.dureeF = dureeF;
-        this.nbr_renard = 10;
+        this.nbr_renard = 10;*/
+    }
+
+    creer() {
+        c.beginPath();
+        c.arc(this.x, this.y, this.rayon, 0, Math.PI * 2, false);
+        c.strokeStyle = 'blue';
+        c.stroke();
+    }
+
+    update() {
+        if (this.x + this.rayon > innerWidth || this.x - this.rayon < 0) {
+            this.dx = -this.dx;
+        }
+        if(this.y + this.rayon > innerHeight || this.y - this.rayon < 0)
+        {
+            this.dy = -this.dy; 
+        }
+        this.x += this.dx;
+        this.y += this.dy;
+
+        this.creer();
     }
 
    SeDeplacent(){
@@ -52,7 +78,6 @@ class Lapin {
 }
 
 
-
 var canvas = document.querySelector('canvas#app');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -76,9 +101,19 @@ for (var i = 1; i < 100; i++) {
     c.stroke();
 }*/
 
-var x = 200;
-var dx = 4;
-var dy = 4;
+var renards = [];
+for (var i = 1; i <= 100; i++) {
+    var rayon = 30;
+    var x = Math.random() * (innerWidth - rayon * 2) + rayon;
+    var y = Math.random() * (innerHeight - rayon * 2) + rayon;
+    var dx = (Math.random() - 0.5) * 8;
+    var dy = (Math.random() - 0.5) * 8;
+
+    renards.push(new Renard({x: x, y: y}, dx, dy, rayon));
+}
+
+console.log(renards);
+
 
 var rayon = 30;
 var y = 200;
@@ -86,6 +121,12 @@ function animate() {
     // Permet d'éxécuter la fonction animate plusieurs fois
     requestAnimationFrame(animate);
     c.clearRect(0, 0, innerWidth, innerHeight);
+
+    //renard.creer();
+
+    for (var i = 0; i < renards.length; i++) {
+        renards[i].update();
+    }
 
     c.beginPath();
     c.arc(x,y, rayon, 0, Math.PI * 2, false);
