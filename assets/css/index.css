@@ -13,6 +13,7 @@ canvas {
 }
 
 div#config{
+    width: 450px;
     top: 20px;
     left: 30px;
     border-radius: 6px;
@@ -24,10 +25,33 @@ div#config{
 div#config div#icon {
     position: absolute;
     top: 10px;
+    display: none;
 }
 
 div#config .line {
     margin: 10px 0;
+}
+
+div#config .line p {
+    position: relative;
+    margin-bottom: 0px;
+}
+
+input[type=range] {
+    cursor: pointer;
+}
+
+div#config .line output{
+    position: absolute;
+    right: 0px;
+    font-weight: bold;
+    color: #676767;
+}
+
+div#config .defaut {
+    font-style: italic;
+    font-size: .78em;
+    color: #949494;
 }
 
 div#stats {

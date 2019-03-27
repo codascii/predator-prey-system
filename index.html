@@ -17,46 +17,43 @@
                 <img src="assets/img/rabbit.png" id="rabbit" alt="Image du renard" style="width: 50px" />
             </div>
             <div class="line">
-                <span>Fréquence d'apparition d'un lapin</span>
-                <div class="form-inline">
-                    <input type="text" id="rabbitFrequency" placeholder="1 tous les x secondes" class="form-control">
-                </div>
+                <p>
+                    <span>Fréquence d'apparition d'un lapin</span>
+                    <output id="rabbitFrequencyValue">1 par seconde</output>
+                </p>
+                <input type="range" id="rabbitFrequency" class="form-control-range" value="1" onchange="app.update(UPDATABLE.RABBIT_FREQUENCY);"/>
             </div>
             <div class="line">
                 <span>Distance de visibilité</span>
                 <div class="form-inline">
                     <input type="text" class="form-control" value="10"/>
                     <span>&nbsp;&nbsp;&nbsp;</span>
-                    <input type="submit" value="valider" class="btn btn-primary">
+                    <input type="submit" value="Appliquer" class="btn btn-primary" onclick="app.update(UPDATABLE.RABBIT_DISTANCE_VISIBILITY);"/>
                 </div>
             </div>
             <div class="line">
-                <span>Durée de vie d'un renard</span>
-                <div class="form-inline">
-                    <input type="text" id="ttlFox" placeholder="En secondes" class="form-control"/>
-                    <span>&nbsp;&nbsp;&nbsp;</span>
-                    <input type="submit" value="valider" class="btn btn-primary">
-                </div>
+                <p>
+                    <span>Durée de vie d'un renard</span>
+                    <output id="ttlFoxValue">10 seconde(s)</output>
+                </p>
+                <input type="range" id="ttlFox" placeholder="En secondes" class="form-control-range" value="10" onchange="app.update(UPDATABLE.FOX_TTL);"/>
             </div>
             <div class="line">
-                <span>Nombre de lapin initial</span>
-                <div class="form-inline">
-                    <input type="text" id="initialRabbitNumber" placeholder="secondes" class="form-control">
-                    <span>&nbsp;&nbsp;&nbsp;</span>
-                    <input type="submit" value="valider" class="btn btn-primary">
-                </div>
+                <p>
+                    <span>Nombre de lapin initial</span>
+                    <output id="initialRabbitNumberValue">10</output>
+                </p>
+                <input type="range" id="initialRabbitNumber" class="form-control-range" value="10" onchange="initialRabbitNumberValue.value=value">
             </div>
             <div class="line">
-                <span>Nombre de renard initial (10 par défaut)</span>
-                <div class="form-inline">
-                    <input type="text" id="initialFoxNumber" placeholder="secondes" class="form-control">
-                    <span>&nbsp;&nbsp;&nbsp;</span>
-                    <input type="submit" value="valider" class="btn btn-primary" onclick="app.updateFoxNumnber()">
-                </div>
+                <p>
+                    <span>Nombre de renard initial</span>
+                    <output id="initialFoxNumberValue">10</output>
+                </p>
+                <input type="range" id="initialFoxNumber" class="form-control-range" value="10" onchange="initialFoxNumberValue.value=value">                
             </div>
-            <div class="line">
-                <button class="btn btn-success" style="width:100%" onclick="app.start();">Démarrer la simulation</button>
-            </div>
+            <button class="btn btn-success" onclick="this.textContent='Redémarrer la simulation';app.start();">Démarrer la simulation</button>
+            <button class="btn btn-danger">Reset</button>
         </div>
         <div id="stats">
             <span>Nombre de lapin mangé : <span id="rabbitEatedNumber">0</span></span>

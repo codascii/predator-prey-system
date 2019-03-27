@@ -5,18 +5,29 @@ canvas.height = window.innerHeight;
 // Context
 var c = canvas.getContext('2d');
 var rayon = 30;
-/*var y = 200;*/
 
+const UPDATABLE = {
+    RABBIT_FREQUENCY: 1,
+    RABBIT_DISTANCE_VISIBILITY: 2,
+    RABBIT_INITIAL_NUMBER: 3,
+    FOX_INITIAL_NUMBER: 5,
+    FOX_TTL: 4
+};
 
-
-var app = {
+var app = {    
+    ///////////////////////////////////  
+    //  Paramètres de l'application  //
+    ///////////////////////////////////
+    rabbitFrequency: 1,         //  Fréquence d'apparition d'un lapin
+    distanceVisibility: 20,     //  Distande de visibilité
+    foxTTL: 10,                 //  Durrée de vie d'un renard en secondes
+    initialRabbitNumber: 0,     //  Nombre de lapin initial
+    initialFoxNumber: 0,        // Nombre de renard initial
+    //////////////////////////////////////////
+    //  Variables locales à l'application   //
+    //////////////////////////////////////////
     alredyStarted: false,
-    // Nombre initiale de renard
-    initialFoxNumber: 0,
-    initialRabbitNumber: 0,
-    rabbitFrequency: 1,
     rabbitEatedNumber: 0,
-    rabbitTTL: 1, //  Durrée de vie d'un renard en minutes
     foxes: [],
     rabbits: [],
     start: () => {
@@ -27,22 +38,18 @@ var app = {
         app.initFox();
         app.initRabbit();
         app.show();
-        /*console.log(app.foxes);*/
-
-        
-
     },
     initFox: () => {
         var ifn = parseInt(document.getElementById('initialFoxNumber').value);
         app.initialFoxNumber = (ifn < 0 || isNaN(ifn)) ? 10 : ifn;
 
         for (var i = 1; i <= app.initialFoxNumber; i++) {
-            var rayon = 30;
+            //var rayon = 90;
             var x = Math.random() * (innerWidth - rayon * 2);
             var y = Math.random() * (innerHeight - rayon * 2);
             var dx = (Math.random() - 0.5) * 8;
             var dy = (Math.random() - 0.5) * 8;
-            app.foxes.push(new Fox({x: x, y: y}, dx, dy, rayon));
+            app.foxes.push(new Fox({x: x, y: y}, dx, dy));
         }
     },
     initRabbit: () => {
@@ -58,14 +65,55 @@ var app = {
             app.rabbits.push(new Rabbit({x: x, y: y}, dx, dy, rayon));
         }
     },
+    update: (what) => {
+        var value;
+
+        switch (what) {
+            case UPDATABLE.RABBIT_FREQUENCY:
+                value = parseInt(document.getElementById('rabbitFrequency').value);
+                var output = document.getElementById('rabbitFrequencyValue');
+                var outputText = value + " par seconde";
+
+                app.rabbitFrequency = value;
+                output.textContent = outputText;
+                break;
+            case UPDATABLE.RABBIT_DISTANCE_VISIBILITY:
+                alert('update RABBIT_DISTANCE_VISIBILITY');
+                break;
+            case UPDATABLE.FOX_TTL:
+                value = parseInt(document.getElementById('ttlFox').value);
+                var output = document.getElementById('ttlFoxValue');
+                var outputText;
+
+                // Mise à jour de la variable de l'application
+                app.foxTTL = value;
+                if (app.foxTTL > 60) {
+                    outputText = "1 minute " + (app.foxTTL - 60) + " seconde(s)";
+                    
+                } else {
+                    outputText = app.foxTTL + " seconde(s)";
+                }
+                
+                output.textContent = outputText;
+                break;
+            case UPDATABLE.RABBIT_INITIAL_NUMBER:
+                alert('update RABBIT_INITIAL_NUMBER');
+                break;
+            case UPDATABLE.FOX_INITIAL_NUMBER:
+                alert('update FOX_INITIAL_NUMBER');
+                break;
+            default:
+                alert("Erreur de mise à jour : Code " + what + " inconnu");
+        }
+    },
     updateFoxNumnber: () => {
         app.reset('Fox');
         app.initFox();
     },
     show: () => {
         app.animate();
-        //app.generateRabbit();
-        app.checkRabbitTTL();
+        app.generateRabbit();
+        app.checkFoxTTL();
         /*for (var f = 0; f < app.foxes.length; f++) {
             if(app.foxes[f].lastLunch === app.foxes[f].lastLunchInit) {
                 console.log("=================================");
@@ -73,10 +121,10 @@ var app = {
             }
         }*/
     },
-    checkRabbitTTL: () => {
+    checkFoxTTL: () => {
         setInterval(() => {
             for (var f = 0; f < app.foxes.length; f++) {
-                app.foxes[f].checkTTL(app.foxes, f, app.rabbitTTL);
+                app.foxes[f].checkTTL(app.foxes, f, app.foxTTL);
             }
         }, 1000);
     },
@@ -125,22 +173,26 @@ var app = {
         app.rabbitFrequency = (rf < 0 || isNaN(rf)) ? 1 : rf;
         
         setInterval(() => {
-            var rayon = 30;
-            var x = Math.random() * (innerWidth - rayon * 2) + rayon;
-            var y = Math.random() * (innerHeight - rayon * 2) + rayon;
-            var dx = (Math.random() - 0.5) * 8;
-            var dy = (Math.random() - 0.5) * 8;
-            app.rabbits.push(new Rabbit({x: x, y: y}, dx, dy, rayon));
-        }, app.rabbitFrequency * 1000);
+            for (var i = 0; i < app.rabbitFrequency; i++) {
+                var rayon = 30;
+                var x = Math.random() * (innerWidth - rayon * 2) + rayon;
+                var y = Math.random() * (innerHeight - rayon * 2) + rayon;
+                var dx = (Math.random() - 0.5) * 8;
+                var dy = (Math.random() - 0.5) * 8;
+                app.rabbits.push(new Rabbit({x: x, y: y}, dx, dy, rayon));
+            }
+        }, 1000);
 
         setInterval(() => {
-            var rayon = 30;
-            var x = Math.random() * (innerWidth - rayon * 2) + rayon;
-            var y = Math.random() * (innerHeight - rayon * 2) + rayon;
-            var dx = (Math.random() - 0.5) * 8;
-            var dy = (Math.random() - 0.5) * 8;
-            app.foxes.push(new Fox({x: x, y: y}, dx, dy, rayon));
-        }, app.rabbitFrequency * 10000);
+            for (var i = 0; i < app.rabbitFrequency; i++) {
+                var rayon = 30;
+                var x = Math.random() * (innerWidth - rayon * 2) + rayon;
+                var y = Math.random() * (innerHeight - rayon * 2) + rayon;
+                var dx = (Math.random() - 0.5) * 8;
+                var dy = (Math.random() - 0.5) * 8;
+                app.foxes.push(new Fox({x: x, y: y}, dx, dy));
+            }
+        }, 10000);
     },
     reset: (what) => {
         console.log("reset");
@@ -148,11 +200,3 @@ var app = {
     }
 }
 
-
-/*var rab = new Rabbit({x: 380, y: 120}, 0, 0, 0);
-        var fox = new Fox({x: 500, y: 200}, 0, 0, 0);
-
-        rab.update();
-        fox.update();
-
-        console.log(app.getDistanceBetweenFoxAndRabbit(fox, rabbit));*/

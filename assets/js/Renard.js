@@ -1,30 +1,35 @@
-const TYPE_ANIMAL = {
-    FOX: 1,
-    RABBIT: 2,
-};
-
+/**
+ * Classe Fox
+ */
 class Fox {
 
-    constructor(coords, dx, dy, rayon) {
-        this.x = coords.x
-        this.y = coords.y
+    constructor(coords, dx, dy) {
+        this.image = {
+            src: document.getElementById("fox"),
+            width: 50,
+            height: 50,
+        };
+
+        this.x = coords.x;
+        this.y = coords.y;
+        this.xCenter = this.x + (this.image.width / 2);
+        this.yCenter = this.y + (this.image.height / 2);
         this.dx = dx;
         this.dy = dy;
-        this.rayon = rayon;
-        this.image = document.getElementById("fox");
+        
         this.lastLunch = new Date().getTime();
         this.lastLunchInit = new Date().getTime();
     }
 
     move() {
-        c.drawImage(this.image, this.x, this.y, 50, 50);
+        c.drawImage(this.image.src, this.x, this.y, this.image.width, this.image.height);
     }
 
     update() {
-        if (this.x + this.rayon > innerWidth || this.x - this.rayon < 0) {
+        if (this.x + this.image.width > innerWidth || this.x < 0) {
             this.dx = -this.dx;
         }
-        if(this.y + 40 > innerHeight || this.y < 0)
+        if(this.y + this.image.height > innerHeight || this.y < 0)
         {
             this.dy = -this.dy; 
         }
@@ -38,11 +43,6 @@ class Fox {
         this.die(foxesTab, index, rabbitTTL);
     }
 
-   SeDeplacent(){
-        return ;
-    }
-
-
     eatRabbit(rabbitsTab, index) {
         // Enlève le lapin qui se trouve dans la case r du jeu
         // Il a été mangé par un renard
@@ -53,7 +53,7 @@ class Fox {
 
     die(foxesTab, index, rabbitTTL) {
         const now = new Date().getTime();
-        if ((now - this.lastLunch) / 1000.0 > rabbitTTL * 60) {
+        if ((now - this.lastLunch) / 1000.0 > rabbitTTL) {
             foxesTab.splice(index, 1);
         }
     }
