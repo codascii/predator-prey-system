@@ -16,6 +16,7 @@ var app = {
     initialRabbitNumber: 0,
     rabbitFrequency: 1,
     rabbitEatedNumber: 0,
+    rabbitTTL: 1, //  Durrée de vie d'un renard en minutes
     foxes: [],
     rabbits: [],
     start: () => {
@@ -64,14 +65,27 @@ var app = {
     show: () => {
         app.animate();
         //app.generateRabbit();
+        app.checkRabbitTTL();
+        /*for (var f = 0; f < app.foxes.length; f++) {
+            if(app.foxes[f].lastLunch === app.foxes[f].lastLunchInit) {
+                console.log("=================================");
+                console.log(app.foxes[f]);
+            }
+        }*/
+    },
+    checkRabbitTTL: () => {
+        setInterval(() => {
+            for (var f = 0; f < app.foxes.length; f++) {
+                app.foxes[f].checkTTL(app.foxes, f, app.rabbitTTL);
+            }
+        }, 1000);
     },
     collision: () => {
         for (var f = 0; f < app.foxes.length; f++) {
             for (var r = 0; r < app.rabbits.length; r++) {
-                if (20 >= app.getDistanceBetweenFoxAndRabbit(app.foxes[f], app.rabbits[r])) {
-                    // Enlève le lapin qui se trouve dans la case r du jeu
-                    // Il a été mangé par un renard
-                    app.rabbits.splice(r, 1);
+                if (app.getDistanceBetweenFoxAndRabbit(app.foxes[f], app.rabbits[r]) <= 20) {
+
+                    app.foxes[f].eatRabbit(app.rabbits, r);                
 
                     //  Incrémentation du nombre de lapin mangé
                     app.rabbitEatedNumber++;

@@ -12,6 +12,8 @@ class Fox {
         this.dy = dy;
         this.rayon = rayon;
         this.image = document.getElementById("fox");
+        this.lastLunch = new Date().getTime();
+        this.lastLunchInit = new Date().getTime();
     }
 
     move() {
@@ -30,11 +32,10 @@ class Fox {
         this.y += this.dy;
 
         this.move();
-        this.checkTTL();
     }
 
-    checkTTL() {
-
+    checkTTL(foxesTab, index, rabbitTTL) {
+        this.die(foxesTab, index, rabbitTTL);
     }
 
    SeDeplacent(){
@@ -42,13 +43,18 @@ class Fox {
     }
 
 
-    MangeLapin(){
+    eatRabbit(rabbitsTab, index) {
+        // Enlève le lapin qui se trouve dans la case r du jeu
+        // Il a été mangé par un renard
+        rabbitsTab.splice(index, 1);
 
-        return;
+        this.lastLunch = new Date().getTime();
     }
 
-    Meurt(){
-         
-        return;
+    die(foxesTab, index, rabbitTTL) {
+        const now = new Date().getTime();
+        if ((now - this.lastLunch) / 1000.0 > rabbitTTL * 60) {
+            foxesTab.splice(index, 1);
+        }
     }
 }
