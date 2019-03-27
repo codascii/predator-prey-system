@@ -29,3 +29,13 @@ div#config div#icon {
 div#config .line {
     margin: 10px 0;
 }
+
+div#stats {
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    background-color: rgba(122, 122, 122, .8);
+    padding: 10px 15px;
+    border-radius: 7px;
+    color: white;
+}

@@ -15,6 +15,7 @@ var app = {
     initialFoxNumber: 0,
     initialRabbitNumber: 0,
     rabbitFrequency: 1,
+    rabbitEatedNumber: 0,
     foxes: [],
     rabbits: [],
     start: () => {
@@ -64,14 +65,23 @@ var app = {
         app.animate();
         //app.generateRabbit();
     },
-    test: () => {
+    collision: () => {
         for (var f = 0; f < app.foxes.length; f++) {
             for (var r = 0; r < app.rabbits.length; r++) {
                 if (20 >= app.getDistanceBetweenFoxAndRabbit(app.foxes[f], app.rabbits[r])) {
+                    // Enlève le lapin qui se trouve dans la case r du jeu
+                    // Il a été mangé par un renard
                     app.rabbits.splice(r, 1);
+
+                    //  Incrémentation du nombre de lapin mangé
+                    app.rabbitEatedNumber++;
+                    app.updateStatistics();
                 }
             }
         }
+    },
+    updateStatistics: () => {
+        document.getElementById('rabbitEatedNumber').textContent = app.rabbitEatedNumber;
     },
     animate: () => {
         // Permet d'éxécuter la fonction animate plusieurs fois
@@ -81,15 +91,14 @@ var app = {
         //renard.creer();
     
         for (var i = 0; i < app.foxes.length; i++) {
-            /*if (app.foxes[i] !== null)*/ app.foxes[i].update();
+            app.foxes[i].update();
         }
 
         for (var i = 0; i < app.rabbits.length; i++) {
-            /*if (app.rabbits[i] !== null) */app.rabbits[i].update();
+            app.rabbits[i].update();
         }
 
-        
-        app.test();
+        app.collision();
     },
     getDistanceBetweenFoxAndRabbit: (fox, rabbit) => {
         const xDistance = rabbit.x - fox.x;
