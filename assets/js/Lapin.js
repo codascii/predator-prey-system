@@ -1,4 +1,4 @@
-class Lapin {
+class Rabbit {
 
     constructor(coords, dx, dy, actif, multiplicite, vitesse, freqApparition, nbLapin, x,y, id) {
         this.x = coords.x
@@ -6,11 +6,11 @@ class Lapin {
         this.dx = dx;
         this.dy = dy;
         this.rayon = rayon;
+        this.image = document.getElementById("rabbit");
     }
 
-    creer() {
-        const img = document.getElementById("rabbit");
-        c.drawImage(img, this.x, this.y, 50, 50);
+    move() {
+        c.drawImage(this.image, this.x, this.y, 50, 50);
     }
 
     update() {
@@ -24,7 +24,7 @@ class Lapin {
         this.x += this.dx;
         this.y += this.dy;
 
-        this.creer();
+        this.move();
     }
 
     seMultiplier(){

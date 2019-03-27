@@ -5,7 +5,8 @@ canvas.height = window.innerHeight;
 // Context
 var c = canvas.getContext('2d');
 var rayon = 30;
-var y = 200;
+/*var y = 200;*/
+
 
 
 var app = {
@@ -14,7 +15,7 @@ var app = {
     initialFoxNumber: 0,
     initialRabbitNumber: 0,
     rabbitFrequency: 1,
-    renards: [],
+    foxes: [],
     rabbits: [],
     start: () => {
         if (app.alredyStarted) app.reset();
@@ -24,7 +25,9 @@ var app = {
         app.initFox();
         app.initRabbit();
         app.show();
-        console.log(app.renards);
+        /*console.log(app.foxes);*/
+
+        
 
     },
     initFox: () => {
@@ -37,7 +40,7 @@ var app = {
             var y = Math.random() * (innerHeight - rayon * 2);
             var dx = (Math.random() - 0.5) * 8;
             var dy = (Math.random() - 0.5) * 8;
-            app.renards.push(new Renard({x: x, y: y}, dx, dy, rayon));
+            app.foxes.push(new Fox({x: x, y: y}, dx, dy, rayon));
         }
     },
     initRabbit: () => {
@@ -50,7 +53,7 @@ var app = {
             var y = Math.random() * (innerHeight - rayon * 2) + rayon;
             var dx = (Math.random() - 0.5) * 8;
             var dy = (Math.random() - 0.5) * 8;
-            app.rabbits.push(new Lapin({x: x, y: y}, dx, dy, rayon));
+            app.rabbits.push(new Rabbit({x: x, y: y}, dx, dy, rayon));
         }
     },
     updateFoxNumnber: () => {
@@ -59,7 +62,16 @@ var app = {
     },
     show: () => {
         app.animate();
-        app.generateRabbit();
+        //app.generateRabbit();
+    },
+    test: () => {
+        for (var f = 0; f < app.foxes.length; f++) {
+            for (var r = 0; r < app.rabbits.length; r++) {
+                if (20 >= app.getDistanceBetweenFoxAndRabbit(app.foxes[f], app.rabbits[r])) {
+                    app.rabbits.splice(r, 1);
+                }
+            }
+        }
     },
     animate: () => {
         // Permet d'éxécuter la fonction animate plusieurs fois
@@ -68,13 +80,22 @@ var app = {
     
         //renard.creer();
     
-        for (var i = 0; i < app.renards.length; i++) {
-            app.renards[i].update();
+        for (var i = 0; i < app.foxes.length; i++) {
+            /*if (app.foxes[i] !== null)*/ app.foxes[i].update();
         }
 
         for (var i = 0; i < app.rabbits.length; i++) {
-            app.rabbits[i].update();
+            /*if (app.rabbits[i] !== null) */app.rabbits[i].update();
         }
+
+        
+        app.test();
+    },
+    getDistanceBetweenFoxAndRabbit: (fox, rabbit) => {
+        const xDistance = rabbit.x - fox.x;
+        const yDistance = rabbit.y - fox.y;
+
+        return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
     },
     generateRabbit: () => {
         var rf = parseInt(document.getElementById('rabbitFrequency').value);
@@ -86,7 +107,7 @@ var app = {
             var y = Math.random() * (innerHeight - rayon * 2) + rayon;
             var dx = (Math.random() - 0.5) * 8;
             var dy = (Math.random() - 0.5) * 8;
-            app.rabbits.push(new Lapin({x: x, y: y}, dx, dy, rayon));
+            app.rabbits.push(new Rabbit({x: x, y: y}, dx, dy, rayon));
         }, app.rabbitFrequency * 1000);
 
         setInterval(() => {
@@ -95,12 +116,20 @@ var app = {
             var y = Math.random() * (innerHeight - rayon * 2) + rayon;
             var dx = (Math.random() - 0.5) * 8;
             var dy = (Math.random() - 0.5) * 8;
-            app.renards.push(new Renard({x: x, y: y}, dx, dy, rayon));
+            app.foxes.push(new Fox({x: x, y: y}, dx, dy, rayon));
         }, app.rabbitFrequency * 10000);
     },
     reset: (what) => {
         console.log("reset");
-        if (what === "Fox") app.renards = [];        
+        if (what === "Fox") app.foxes = [];        
     }
 }
 
+
+/*var rab = new Rabbit({x: 380, y: 120}, 0, 0, 0);
+        var fox = new Fox({x: 500, y: 200}, 0, 0, 0);
+
+        rab.update();
+        fox.update();
+
+        console.log(app.getDistanceBetweenFoxAndRabbit(fox, rabbit));*/

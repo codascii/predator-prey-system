@@ -1,4 +1,9 @@
-class Renard {
+const TYPE_ANIMAL = {
+    FOX: 1,
+    RABBIT: 2,
+};
+
+class Fox {
 
     constructor(coords, dx, dy, rayon) {
         this.x = coords.x
@@ -6,11 +11,11 @@ class Renard {
         this.dx = dx;
         this.dy = dy;
         this.rayon = rayon;
+        this.image = document.getElementById("fox");
     }
 
-    creer() {
-        const img = document.getElementById("fox");
-        c.drawImage(img, this.x, this.y, 50, 50);
+    move() {
+        c.drawImage(this.image, this.x, this.y, 50, 50);
     }
 
     update() {
@@ -24,7 +29,7 @@ class Renard {
         this.x += this.dx;
         this.y += this.dy;
 
-        this.creer();
+        this.move();
         this.checkTTL();
     }
 
