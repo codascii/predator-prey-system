@@ -52,4 +52,4 @@ Pénalité sur le nom de fichier :
 * -0.5 pour la ponctuation (‘-‘ entre les noms) 
  
 Pénalités de retard :
-* 1 pt par jour de retard, dès la première minute 
+* 1 pt par jour de retard, dès la première minute
