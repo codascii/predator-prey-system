@@ -19,7 +19,7 @@ var app = {
     //  Paramètres de l'application  //
     ///////////////////////////////////
     rabbitFrequency: 1,         //  Fréquence d'apparition d'un lapin
-    distanceVisibility: 20,     //  Distande de visibilité
+    distanceVisibility: 100,     //  Distande de visibilité
     foxTTL: 10,                 //  Durrée de vie d'un renard en secondes
     initialRabbitNumber: 0,     //  Nombre de lapin initial
     initialFoxNumber: 0,        // Nombre de renard initial
@@ -43,10 +43,12 @@ var app = {
         var ifn = parseInt(document.getElementById('initialFoxNumber').value);
         app.initialFoxNumber = (ifn < 0 || isNaN(ifn)) ? 10 : ifn;
 
+        //console.log(app.initialFoxNumber);
+
         for (var i = 1; i <= app.initialFoxNumber; i++) {
             //var rayon = 90;
-            var x = Math.random() * (innerWidth - rayon * 2);
-            var y = Math.random() * (innerHeight - rayon * 2);
+            var x = Math.random() * (innerWidth - 30);
+            var y = Math.random() * (innerHeight - 40);
             var dx = (Math.random() - 0.5) * 8;
             var dy = (Math.random() - 0.5) * 8;
             app.foxes.push(new Fox({x: x, y: y}, dx, dy));
@@ -78,7 +80,8 @@ var app = {
                 output.textContent = outputText;
                 break;
             case UPDATABLE.RABBIT_DISTANCE_VISIBILITY:
-                alert('update RABBIT_DISTANCE_VISIBILITY');
+                value = parseInt(document.getElementById('distanceVisibility').value);
+                app.distanceVisibility = (value < 20) ? 20 : value;
                 break;
             case UPDATABLE.FOX_TTL:
                 value = parseInt(document.getElementById('ttlFox').value);
@@ -114,12 +117,6 @@ var app = {
         app.animate();
         app.generateRabbit();
         app.checkFoxTTL();
-        /*for (var f = 0; f < app.foxes.length; f++) {
-            if(app.foxes[f].lastLunch === app.foxes[f].lastLunchInit) {
-                console.log("=================================");
-                console.log(app.foxes[f]);
-            }
-        }*/
     },
     checkFoxTTL: () => {
         setInterval(() => {
@@ -149,11 +146,12 @@ var app = {
         // Permet d'éxécuter la fonction animate plusieurs fois
         requestAnimationFrame(app.animate);
         c.clearRect(0, 0, innerWidth, innerHeight);
-    
-        //renard.creer();
+
+        //console.log(app.distanceVisibility);
     
         for (var i = 0; i < app.foxes.length; i++) {
             app.foxes[i].update();
+            //app.foxes[i].attack(app.rabbits, app.distanceVisibility);
         }
 
         for (var i = 0; i < app.rabbits.length; i++) {

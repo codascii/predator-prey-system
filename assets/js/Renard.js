@@ -51,6 +51,33 @@ class Fox {
         this.lastLunch = new Date().getTime();
     }
 
+    attack(rabbitsTab, distanceVisibility) {
+        for (var i = 0; i < rabbitsTab.length; i++) {
+            const xDistance = rabbitsTab[i].x - this.x;
+            const yDistance = rabbitsTab[i].y - this.y;
+
+            const distance = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+
+            if (distance < distanceVisibility) {
+                //console.log('okokokoko');
+                var vaAGauche = this.dx < 0;
+                if (this.x < rabbitsTab[i].x && vaAGauche) {
+                    this.dx = -this.dx;
+                }
+
+                const vaEnHaut = this.dy < 0;
+                if (this.y < rabbitsTab[i].y && vaEnHaut) {
+                    this.dy = -this.dy;
+                }
+
+                /*this.x += this.dx;
+                this.y += this.dy;
+
+                this.move();*/
+            }
+        }
+    }
+
     die(foxesTab, index, rabbitTTL) {
         const now = new Date().getTime();
         if ((now - this.lastLunch) / 1000.0 > rabbitTTL) {

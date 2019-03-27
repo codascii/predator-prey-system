@@ -26,7 +26,7 @@
             <div class="line">
                 <span>Distance de visibilité</span>
                 <div class="form-inline">
-                    <input type="text" class="form-control" value="10"/>
+                    <input type="number" id="distanceVisibility" min="20" max="400" class="form-control" value="100"/>
                     <span>&nbsp;&nbsp;&nbsp;</span>
                     <input type="submit" value="Appliquer" class="btn btn-primary" onclick="app.update(UPDATABLE.RABBIT_DISTANCE_VISIBILITY);"/>
                 </div>
