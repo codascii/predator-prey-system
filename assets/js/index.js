@@ -33,8 +33,8 @@ var app = {
     stopRab: 0,
     stopFox: 0,
     start: () => {
-        if (app.alredyStarted) app.reset();
-        else app.alredyStarted = true;
+        //if (app.alredyStarted) app.reset();
+        //else app.alredyStarted = true;
 
         console.log('Application started !');
         app.initFox();
@@ -208,7 +208,7 @@ var app = {
         var initFoxNbVal = document.getElementById("initialFoxNumberValue");
         var rabbitFeqVal = document.getElementById("rabbitFrequencyValue");
 
-        distVisibility.value = 20;
+        distVisibility.value = 100;
         ttlFoxVal.value = 0;
         initRabbitNb.value = 0;
         initFoxNbVal.value = 0;
