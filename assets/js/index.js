@@ -30,6 +30,8 @@ var app = {
     rabbitEatedNumber: 0,
     foxes: [],
     rabbits: [],
+    stopRab: 0,
+    stopFox: 0,
     start: () => {
         if (app.alredyStarted) app.reset();
         else app.alredyStarted = true;
@@ -170,7 +172,7 @@ var app = {
         var rf = parseInt(document.getElementById('rabbitFrequency').value);
         app.rabbitFrequency = (rf < 0 || isNaN(rf)) ? 1 : rf;
         
-        setInterval(() => {
+        app.stopRab = setInterval(() => {
             for (var i = 0; i < app.rabbitFrequency; i++) {
                 var rayon = 30;
                 var x = Math.random() * (innerWidth - rayon * 2) + rayon;
@@ -181,7 +183,7 @@ var app = {
             }
         }, 1000);
 
-        setInterval(() => {
+        app.stopFox = setInterval(() => {
             for (var i = 0; i < app.rabbitFrequency; i++) {
                 var rayon = 30;
                 var x = Math.random() * (innerWidth - rayon * 2) + rayon;
@@ -193,8 +195,36 @@ var app = {
         }, 10000);
     },
     reset: (what) => {
-        console.log("reset");
-        if (what === "Fox") app.foxes = [];        
+           
+        var distVisibility = document.getElementById("distanceVisibility");
+        var initRabbitNb = document.getElementById("initialRabbitNumber"); 
+        var rabbitEatNb = document.getElementById("rabbitEatedNumber");
+        var rabbitFreq = document.getElementById("rabbitFrequency");
+        var ttlFox = document.getElementById("ttlFox");
+        var initFoxNb = document.getElementById("initialFoxNumber");
+
+        var initRabbitNbVal = document.getElementById("initialRabbitNumberValue");
+        var ttlFoxVal = document.getElementById("ttlFoxValue");
+        var initFoxNbVal = document.getElementById("initialFoxNumberValue");
+        var rabbitFeqVal = document.getElementById("rabbitFrequencyValue");
+
+        distVisibility.value = 20;
+        ttlFoxVal.value = 0;
+        initRabbitNb.value = 0;
+        initFoxNbVal.value = 0;
+        rabbitEatNb.textContent = 0;
+        ttlFox.value = 0;
+        rabbitFeqVal.value = 0;
+        initRabbitNbVal.value = 0;
+        rabbitFreq.value = 0;
+        initFoxNb.value = 0;
+
+        app.rabbits = [];
+        app.foxes = [];
+
+        clearInterval(app.stopRab);
+        clearInterval(app.stopFox);
+
     }
 }
 
