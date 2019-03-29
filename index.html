@@ -53,7 +53,7 @@
                 <input type="range" id="initialFoxNumber" class="form-control-range" value="10" onchange="initialFoxNumberValue.value=value">                
             </div>
             <button class="btn btn-success" onclick="this.textContent='Redémarrer la simulation';app.start();">Démarrer la simulation</button>
-            <button class="btn btn-danger">Reset</button>
+            <button class="btn btn-danger" onclick="app.reset()">Reset</button>
         </div>
         <div id="stats">
             <span>Nombre de lapin mangé : <span id="rabbitEatedNumber">0</span></span>
