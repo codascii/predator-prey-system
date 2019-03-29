@@ -130,7 +130,7 @@ var app = {
     collision: () => {
         for (var f = 0; f < app.foxes.length; f++) {
             for (var r = 0; r < app.rabbits.length; r++) {
-                if (app.getDistanceBetweenFoxAndRabbit(app.foxes[f], app.rabbits[r]) <= 20) {
+                if (app.getDistanceBetweenFoxAndRabbit(app.foxes[f], app.rabbits[r]) <= 30) {
 
                     app.foxes[f].eatRabbit(app.rabbits, r);                
 
