@@ -33,8 +33,12 @@ var app = {
     stopRab: 0,
     stopFox: 0,
     start: () => {
-        //if (app.alredyStarted) app.reset();
-        //else app.alredyStarted = true;
+        if (app.alredyStarted) {
+            app.reset();
+        }
+        else {
+            app.alredyStarted = true;
+        }
 
         console.log('Application started !');
         app.initFox();
@@ -53,6 +57,8 @@ var app = {
             var y = Math.random() * (innerHeight - 40);
             var dx = (Math.random() - 0.5) * 8;
             var dy = (Math.random() - 0.5) * 8;
+            console.log("dx="+dx);
+            console.log("dy="+dy);
             app.foxes.push(new Fox({x: x, y: y}, dx, dy));
         }
     },
@@ -77,6 +83,7 @@ var app = {
                 value = parseInt(document.getElementById('rabbitFrequency').value);
                 var output = document.getElementById('rabbitFrequencyValue');
                 var outputText = value + " par seconde";
+                console.log("value="+value);
 
                 app.rabbitFrequency = value;
                 output.textContent = outputText;
@@ -149,7 +156,7 @@ var app = {
         requestAnimationFrame(app.animate);
         c.clearRect(0, 0, innerWidth, innerHeight);
 
-        //console.log(app.distanceVisibility);
+        console.log("app.distanceVisibility");
     
         for (var i = 0; i < app.foxes.length; i++) {
             app.foxes[i].update();
@@ -209,15 +216,15 @@ var app = {
         var rabbitFeqVal = document.getElementById("rabbitFrequencyValue");
 
         distVisibility.value = 100;
-        ttlFoxVal.value = 0;
-        initRabbitNb.value = 0;
-        initFoxNbVal.value = 0;
+        ttlFoxVal.textContent = 10 + " seconde(s)";
+        initRabbitNb.value = 10;
+        initFoxNbVal.value = 10;
         rabbitEatNb.textContent = 0;
-        ttlFox.value = 0;
-        rabbitFeqVal.value = 0;
-        initRabbitNbVal.value = 0;
-        rabbitFreq.value = 0;
-        initFoxNb.value = 0;
+        ttlFox.value = 10;
+        rabbitFeqVal.textContent = 1 + " par seconde";
+        initRabbitNbVal.value = 10;
+        rabbitFreq.value = 1;
+        initFoxNb.value = 10;
 
         app.rabbits = [];
         app.foxes = [];
