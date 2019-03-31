@@ -229,6 +229,8 @@ var app = {
         app.rabbits = [];
         app.foxes = [];
 
+        app.rabbitEatedNumber = 0;
+
         clearInterval(app.stopRab);
         clearInterval(app.stopFox);
 
